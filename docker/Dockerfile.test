@@ -1,0 +1,16 @@
+FROM node:14
+
+# set working directory
+WORKDIR /app
+
+# copy project file
+COPY package.json .
+
+# install ALL node_modeles, including 'devDependencies'
+RUN npm install
+
+# copy the entire project
+COPY . .
+
+# Remove npmrc file because env variable NPM_TOKEN is set for travis projects
+RUN rm -f ./.npmrc
