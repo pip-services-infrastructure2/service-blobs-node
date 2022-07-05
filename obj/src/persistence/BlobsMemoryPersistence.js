@@ -185,7 +185,8 @@ class BlobsMemoryPersistence extends pip_services3_data_nodex_1.IdentifiableMemo
             let buffer = this._content[id];
             item.create_time = new Date();
             item.size = buffer != null ? buffer.length : 0;
-            return yield _super.update.call(this, correlationId, item);
+            let res = yield _super.update.call(this, correlationId, item);
+            return res;
         });
     }
     abortWrite(correlationId, token) {

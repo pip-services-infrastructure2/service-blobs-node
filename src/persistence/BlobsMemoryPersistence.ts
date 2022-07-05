@@ -134,7 +134,7 @@ export class BlobsMemoryPersistence
         }
 
         item = await super.create(correlationId, item);
-        let buffer = new Buffer([])
+        let buffer = Buffer.alloc(0)
         this._content[item.id] = buffer;
         return item.id;
     }

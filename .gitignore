@@ -2,7 +2,6 @@
 /npm-debug.log
 /.idea
 /data/blobs.test/*
-/data/temp/*
 /obj/test
 /docker/id_rsa*
 package-lock.json
