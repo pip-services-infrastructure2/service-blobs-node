@@ -18,4 +18,4 @@ RUN npm install typescript@3.6.2 \
 COPY . .
 
 # Generate proto files
-RUN cd src/protos && npx grpc_tools_node_protoc  --js_out=import_style=commonjs,binary:./ --grpc_out=.  ./component_v1.proto
+RUN cd src/protos && npx grpc_tools_node_protoc  --js_out=import_style=commonjs,binary:./ --grpc_out=.  ./blobs_v1.proto
