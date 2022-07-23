@@ -1,6 +1,24 @@
 {
     "name": "service-blobs-node",
+    "type": "microservice",
+    "language": "node",
     "version": "1.0.0",
+    "build": 0,
     "registry": "pipdevs",
-    "build": 0
+    "artifacts": [
+        {
+            "name": "<name>",
+            "tag": "latest",
+            "type": "docker"
+        },
+        {
+            "name": "<name>",
+            "tag": "<version>-<build>",
+            "type": "docker"
+        },
+        {
+            "name": "<name>",
+            "type": "npm"
+        }
+    ]
 }
