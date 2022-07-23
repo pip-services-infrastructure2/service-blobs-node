@@ -13,8 +13,9 @@ RUN npm install typescript@3.6.2 \
     && npm install grpc-tools@1.7.0 \
     && npm install grpc_tools_node_protoc_ts@5.0.1
 
-    
+
 # copy the entire project
 COPY . .
 
-RUN npm run protogen
+# Generate proto files
+RUN cd src/protos && npx grpc_tools_node_protoc  --js_out=import_style=commonjs,binary:./ --grpc_out=.  ./component_v1.proto

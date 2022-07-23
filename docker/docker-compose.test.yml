@@ -1,12 +1,11 @@
 version: '3.3'
 
 services:
-
   test:
+    image: ${IMAGE:-pipdevs/test}
     build:
       context: ..
       dockerfile: docker/Dockerfile.test
-    image: ${IMAGE:-pipdevs/test}
     command: ${TEST_CMD:-npm test}
     links:
       - mongo
