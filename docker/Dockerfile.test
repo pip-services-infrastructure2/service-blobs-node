@@ -9,8 +9,7 @@ COPY docker/id_rsa /root/.ssh/
 # Setup ssh access to git repositories
 RUN chmod 600 /root/.ssh/id_rsa* \
     && ssh-keyscan github.com >> ~/.ssh/known_hosts \
-    && ssh-keyscan gitlab.com >> ~/.ssh/known_hosts \
-    && git config --global --add url."git@github.com:".insteadOf "https://github.com/"
+    && ssh-keyscan gitlab.com >> ~/.ssh/known_hosts
 
 # Set working directory
 WORKDIR /app
