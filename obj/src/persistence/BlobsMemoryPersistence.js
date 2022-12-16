@@ -140,7 +140,7 @@ class BlobsMemoryPersistence extends pip_services3_data_nodex_1.IdentifiableMemo
                     .withDetails('max_size', this._maxBlobSize);
             }
             item = yield _super.create.call(this, correlationId, item);
-            let buffer = new Buffer([]);
+            let buffer = Buffer.alloc(0);
             this._content[item.id] = buffer;
             return item.id;
         });
@@ -185,8 +185,7 @@ class BlobsMemoryPersistence extends pip_services3_data_nodex_1.IdentifiableMemo
             let buffer = this._content[id];
             item.create_time = new Date();
             item.size = buffer != null ? buffer.length : 0;
-            let res = yield _super.update.call(this, correlationId, item);
-            return res;
+            return yield _super.update.call(this, correlationId, item);
         });
     }
     abortWrite(correlationId, token) {

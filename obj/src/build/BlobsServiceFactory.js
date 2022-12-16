@@ -7,7 +7,7 @@ const BlobsMongoDbPersistence_1 = require("../persistence/BlobsMongoDbPersistenc
 const BlobsFilePersistence_1 = require("../persistence/BlobsFilePersistence");
 const BlobsMemoryPersistence_1 = require("../persistence/BlobsMemoryPersistence");
 const BlobsController_1 = require("../logic/BlobsController");
-const BlobsHttpServiceV1_1 = require("../services/version1/BlobsHttpServiceV1");
+const BlobsCommandableHttpServiceV1_1 = require("../services/version1/BlobsCommandableHttpServiceV1");
 const BlobsCommandableGrpcServiceV1_1 = require("../services/version1/BlobsCommandableGrpcServiceV1");
 const BlobsGrpcServiceV1_1 = require("../services/version1/BlobsGrpcServiceV1");
 class BlobsServiceFactory extends pip_services3_components_nodex_1.Factory {
@@ -18,7 +18,7 @@ class BlobsServiceFactory extends pip_services3_components_nodex_1.Factory {
         this.registerAsType(BlobsServiceFactory.MongoDbPersistenceDescriptor, BlobsMongoDbPersistence_1.BlobsMongoDbPersistence);
         this.registerAsType(BlobsServiceFactory.S3PersistenceDescriptor, BlobsMongoDbPersistence_1.BlobsMongoDbPersistence);
         this.registerAsType(BlobsServiceFactory.ControllerDescriptor, BlobsController_1.BlobsController);
-        this.registerAsType(BlobsServiceFactory.HttpServiceDescriptor, BlobsHttpServiceV1_1.BlobsHttpServiceV1);
+        this.registerAsType(BlobsServiceFactory.HttpServiceDescriptor, BlobsCommandableHttpServiceV1_1.BlobsHttpServiceV1);
         this.registerAsType(BlobsServiceFactory.CommandableGrpcServiceDescriptor, BlobsCommandableGrpcServiceV1_1.BlobsCommandableGrpcServiceV1);
         this.registerAsType(BlobsServiceFactory.GrpcServiceDescriptor, BlobsGrpcServiceV1_1.BlobsGrpcServiceV1);
     }
@@ -30,7 +30,7 @@ BlobsServiceFactory.FilePersistenceDescriptor = new pip_services3_commons_nodex_
 BlobsServiceFactory.MongoDbPersistenceDescriptor = new pip_services3_commons_nodex_1.Descriptor("service-blobs", "persistence", "mongodb", "*", "1.0");
 BlobsServiceFactory.S3PersistenceDescriptor = new pip_services3_commons_nodex_1.Descriptor("service-blobs", "persistence", "s3", "*", "1.0");
 BlobsServiceFactory.ControllerDescriptor = new pip_services3_commons_nodex_1.Descriptor("service-blobs", "controller", "default", "*", "1.0");
-BlobsServiceFactory.HttpServiceDescriptor = new pip_services3_commons_nodex_1.Descriptor("service-blobs", "service", "http", "*", "1.0");
+BlobsServiceFactory.HttpServiceDescriptor = new pip_services3_commons_nodex_1.Descriptor("service-blobs", "service", "commandable-http", "*", "1.0");
 BlobsServiceFactory.CommandableGrpcServiceDescriptor = new pip_services3_commons_nodex_1.Descriptor("service-blobs", "service", "commandable-grpc", "*", "1.0");
 BlobsServiceFactory.GrpcServiceDescriptor = new pip_services3_commons_nodex_1.Descriptor("service-blobs", "service", "grpc", "*", "1.0");
 //# sourceMappingURL=BlobsServiceFactory.js.map

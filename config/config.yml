@@ -64,7 +64,7 @@
     port: {{HTTP_PORT}}{{^HTTP_PORT}}8080{{/HTTP_PORT}}
 
 # HTTP endpoint version 1.0
-- descriptor: "service-blobs:service:http:default:1.0"
+- descriptor: "service-blobs:service:commandable-http:default:1.0"
   swagger:
     enable: true
     auto: true

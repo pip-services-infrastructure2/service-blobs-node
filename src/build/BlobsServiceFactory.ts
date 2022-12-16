@@ -6,7 +6,7 @@ import { BlobsFilePersistence } from '../persistence/BlobsFilePersistence';
 import { BlobsMemoryPersistence } from '../persistence/BlobsMemoryPersistence';
 
 import { BlobsController } from '../logic/BlobsController';
-import { BlobsHttpServiceV1 } from '../services/version1/BlobsHttpServiceV1';
+import { BlobsHttpServiceV1 } from '../services/version1/BlobsCommandableHttpServiceV1';
 import { BlobsCommandableGrpcServiceV1 } from '../services/version1/BlobsCommandableGrpcServiceV1';
 import { BlobsGrpcServiceV1 } from '../services/version1/BlobsGrpcServiceV1';
 
@@ -19,7 +19,7 @@ export class BlobsServiceFactory extends Factory {
 	public static S3PersistenceDescriptor = new Descriptor("service-blobs", "persistence", "s3", "*", "1.0");
 
 	public static ControllerDescriptor = new Descriptor("service-blobs", "controller", "default", "*", "1.0");
-	public static HttpServiceDescriptor = new Descriptor("service-blobs", "service", "http", "*", "1.0");
+	public static HttpServiceDescriptor = new Descriptor("service-blobs", "service", "commandable-http", "*", "1.0");
 	public static CommandableGrpcServiceDescriptor = new Descriptor("service-blobs", "service", "commandable-grpc", "*", "1.0");
 	public static GrpcServiceDescriptor = new Descriptor("service-blobs", "service", "grpc", "*", "1.0");
 	

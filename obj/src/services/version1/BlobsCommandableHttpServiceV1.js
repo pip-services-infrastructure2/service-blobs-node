@@ -10,4 +10,4 @@ class BlobsHttpServiceV1 extends pip_services3_rpc_nodex_1.CommandableHttpServic
     }
 }
 exports.BlobsHttpServiceV1 = BlobsHttpServiceV1;
-//# sourceMappingURL=BlobsHttpServiceV1.js.map
+//# sourceMappingURL=BlobsCommandableHttpServiceV1.js.map

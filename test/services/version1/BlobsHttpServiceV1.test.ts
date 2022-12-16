@@ -9,7 +9,7 @@ import { IdGenerator } from 'pip-services3-commons-nodex';
 import { BlobInfoV1 } from '../../../src/data/version1/BlobInfoV1';
 import { BlobsMemoryPersistence } from '../../../src/persistence/BlobsMemoryPersistence';
 import { BlobsController } from '../../../src/logic/BlobsController';
-import { BlobsHttpServiceV1 } from '../../../src/services/version1/BlobsHttpServiceV1';
+import { BlobsHttpServiceV1 } from '../../../src/services/version1/BlobsCommandableHttpServiceV1';
 
 let httpConfig = ConfigParams.fromTuples(
     "connection.protocol", "http",
