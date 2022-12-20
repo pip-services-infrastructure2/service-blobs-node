@@ -1,8 +1,10 @@
-name: Pip.Services Delivery Nodex
+name: Pip.Services Infrastructure2 Blobs microservice in Node.js
 
-# Cofigure trigger rules
+# Configure trigger rules
 on: 
   push:
+    branches:
+      - main
     paths:
     - '**'
     - '!README.md'
@@ -10,7 +12,7 @@ on:
 jobs:
   # Setup job
   setup:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-22.04
     if: "!contains(github.event.head_commit.message, '[skip-ci]')"
 
     steps:
@@ -31,34 +33,37 @@ jobs:
       shell: bash
       run: ./script-delivery-ps/setup/prereqs/prereqs.ps1
 
-    - name: Cache delivery artifacts
+    - name: Cache intermediate data
       uses: actions/cache@v3
       with:
         path: |
           script-delivery-ps
-          component*.json
+          component.json
         key: delivery-${{ github.run_id }}-${{ github.run_attempt }}
 
   # Authoring job
   authoring:
     needs: setup
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-22.04
 
     steps:
     - name: Checkout source code
       uses: actions/checkout@main
 
-    - name: Get cached delivery artifacts
+    - name: Get cached intermediate data
       uses: actions/cache@v3
       with:
         path: |
           script-delivery-ps
-          component*.json
+          component.json
         key: delivery-${{ github.run_id }}-${{ github.run_attempt }}
 
     - name: Execute build script
       shell: bash
       run: script-delivery-ps/authoring/build/build.ps1
+      env:
+        GIT_PRIVATE_KEY: ${{ secrets.GIT_PRIVATE_KEY }}
+        NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
     - name: Execute test script
       shell: bash
@@ -75,9 +80,9 @@ jobs:
         # Docker
         DOCKER_USER: ${{ secrets.DOCKER_USER }}
         DOCKER_PASS: ${{ secrets.DOCKER_PASS }}
-        # Node.Js
+        # Node.js
         NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-
+        
     - name: Execute tag script
       shell: bash
       run: ./script-delivery-ps/authoring/tag/tag.ps1
@@ -91,7 +96,7 @@ jobs:
   measure:
     needs: authoring
     if: always()
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-22.04
 
     steps: 
     - name: Get cached delivery artifact
@@ -99,7 +104,7 @@ jobs:
       with:
         path: |
           script-delivery-ps
-          component*.json
+          component.json
         key: delivery-${{ github.run_id }}-${{ github.run_attempt }}
 
     - name: Run script to get metrics and update s3 file

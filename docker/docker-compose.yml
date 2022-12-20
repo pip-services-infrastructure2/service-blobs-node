@@ -2,22 +2,14 @@ version: '3.3'
 
 services:
 
-  test:
+  app:
     build:
       context: ..
       dockerfile: docker/Dockerfile
-    image: ${IMAGE:-pipdevs/app}
-    links:
-      - mongo
+    image: ${IMAGE:-pipservices/app}
     environment:
-      - MONGO_SERVICE_URI=
-      - MONGO_SERVICE_HOST=mongo
-      - MONGO_SERVICE_PORT=27017
-      - MONGO_DB=app
       - HTTP_ENABLED=true
       - GRPC_ENABLED=true
     ports:
       - "8080:8080"
-
-  mongo:
-    image: mongo:latest
+      - "8090:8090"

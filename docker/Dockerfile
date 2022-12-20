@@ -1,37 +1,32 @@
-FROM node:14
+FROM node:14-alpine
 
-# Copy npm config
-COPY docker/.npmrc /root/.npmrc
-
-# Copy local ssh keys
-COPY docker/id_rsa /root/.ssh/
-
-# Setup ssh access to git repositories
-RUN chmod 600 /root/.ssh/id_rsa* \
-    && ssh-keyscan github.com >> ~/.ssh/known_hosts \
-    && ssh-keyscan gitlab.com >> ~/.ssh/known_hosts
-
+# Install python
+RUN apk add --update \
+    python3 \
+    python3-dev \
+    py-pip \
+    build-base \
+  && pip install virtualenv \
+  && rm -rf /var/cache/apk/*
+  
 # Set working directory
 WORKDIR /app
 
 # Copy project file
 COPY package.json .
 
-# Install only production dependencies
+# Install ALL node_modules, including 'devDependencies'
 RUN npm install
 
-# Copy the entire project
+# Copy entire project
 COPY . .
 
-# Set default environment variables
+# set default environment variables
 ENV MONGO_SERVICE_URI ""
 ENV MONGO_SERVICE_HOST mongo
 ENV MONGO_SERVICE_PORT 27017
 ENV MONGO_DB app
 
-# Expose http and grpc ports
 EXPOSE 8080
-EXPOSE 8090
 
-# Set container entrypoint
 ENTRYPOINT [ "node", "./bin/main.js" ]
