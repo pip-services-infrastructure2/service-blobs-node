@@ -95,7 +95,7 @@ Example of microservice configuration
 
 - descriptor: "service-blobs:controller:default:default:1.0"
 
-- descriptor: "service-blobs:service:http:default:1.0"
+- descriptor: "service-blobs:service:commandable-http:default:1.0"
   connection:
     protocol: "http"
     host: "0.0.0.0"
